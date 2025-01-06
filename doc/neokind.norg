@@ -1,0 +1,18 @@
+@document.meta
+  title: neokind manual
+	description: NeoKind User Manual 
+	author: Bruno Ciccarino
+	categories: neo kind manual 
+  created: 2025-1-5
+	version: 0.1 
+@end
+
+
+= TOC Table of Contents
+
+* Table of Contents
+  -> {# Introduction}
+  -> {# Configuring neokinds} 
+  --> {# Icons} 
+  -> {# Credits} 
+

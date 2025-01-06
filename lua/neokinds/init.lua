@@ -13,22 +13,33 @@ M.default_config = {
             open = "",
             empty = "",
             empty_open = "",
+            symlink = "",
         },
         files = {
             default = "",
             no_extension = "",
+            license = "",
+            news = "󰎕",
+            readme = "",
+            code_of_conduct = "󱃱",
+            todo = "󰝖",
+            [".bashrc"] = "󰒓",
             extensions = {
-                lua = "",
+                asm = "",
+                astro = "",
+                basic = "󰫯",
+                c = "",
+                cpp = "",
+                html = "",
                 js = "",
                 json = "",
-                html = "",
                 css = "",
                 md = "",
+                norg = "",
                 py = "",
                 ts = "ﯤ",
                 java = "",
-                c = "",
-                cpp = "",
+                lua = "",
                 rb = "",
                 go = "",
                 rs = "",
@@ -132,6 +143,73 @@ function M.configure_cmp()
         vim.api.nvim_set_option("completeopt", "menu,menuone,preview,noinsert")
     end
 end
+
+M.icon = function(config, node, state)
+    local icon = config.default or " "
+    local padding = config.padding or " "
+    local highlight = config.highlight or "NeoTreeFileIcon"
+
+    if node.type == "directory" then
+        highlight = "NeoTreeDirectoryIcon"
+        if node:is_expanded() then
+            icon = config.folder_open or M.config.icons.folders.open
+        else
+            icon = config.folder_closed or M.config.icons.folders.closed
+        end
+    elseif node.type == "file" then
+        local ext = node.ext or ""  -- Obtemos a extensão do arquivo
+        -- Verificação segura se 'extensions' existe dentro de 'files'
+        if M.config.icons.files.extensions and M.config.icons.files.extensions[ext] then
+            icon = M.config.icons.files.extensions[ext]  -- Icone baseado na extensão
+        else
+            icon = M.config.icons.files.default  -- Se não encontrar, usa o padrão
+        end
+    else
+        icon = M.config.icons.files.no_extension
+    end
+
+    return {
+        text = icon .. padding,
+        highlight = highlight,
+    }
+end
+
+function M.setup_lualine()
+    local ok, lualine = pcall(require, "lualine")
+    if not ok then
+        vim.notify("Lualine not found. Please install lualine.", vim.log.levels.ERROR)
+        return
+    end
+
+    local diagnostics = {
+        error = M.config.icons.diagnostics.error,
+        warn = M.config.icons.diagnostics.warn,
+        info = M.config.icons.diagnostics.info,
+        hint = M.config.icons.diagnostics.hint,
+    }
+
+    local sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff" },
+        lualine_c = {
+            { "filename", path = 1 },
+            { "diagnostics", sources = { "nvim_diagnostic" }, symbols = diagnostics },
+        },
+        lualine_x = { "encoding", "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
+    }
+
+    lualine.setup({
+        options = {
+            theme = "auto",
+            section_separators = "",
+            component_separators = "",
+        },
+        sections = sections,
+    })
+end
+
 
 function M.configure_file_icons()
     vim.g.neo_tree_file_icons = M.config.icons.files.extensions

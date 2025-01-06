@@ -10,6 +10,9 @@ ide-like pictograms for neovim lsp completion items, make your lsp icons much mo
 > [!NOTE]
 > This plugin would not be possible without mini.icons and lspkind, their links are in the acknowledgements section.
 
+> [!TODO]
+> Adding nvim-tree support
+
 ## 🍺 Installation
 
 ```lua
