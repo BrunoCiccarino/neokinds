@@ -71,7 +71,18 @@ end
 
 function M.configure_cmp()
   local cmp_ok, cmp = pcall(require, "cmp")
-  if cmp_ok then
+  local blink_cmp_ok, blink_cmp = pcall(require, "blink-cmp")
+
+  if blink_cmp_ok then
+    blink_cmp.setup({
+      formatting = {
+        format = function(entry, vim_item)
+          vim_item.kind = string.format("%s %s", M.config.completion_kinds[vim_item.kind] or "", vim_item.kind)
+          return vim_item
+        end,
+      },
+    })
+  elseif cmp_ok then
     cmp.setup({
       formatting = {
         format = function(entry, vim_item)
