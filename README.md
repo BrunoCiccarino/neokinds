@@ -9,6 +9,12 @@ ide-like pictograms for neovim lsp completion items, make your lsp icons much mo
 ```lua
 {
     "BrunoCiccarino/neokinds",
+    config = function ()
+        require("neokinds")
+        neokinds.setup({
+            ...
+        })
+    end
 }
 ```
 
