@@ -1,6 +1,6 @@
 # neokinds 🥴 
 
-jetbrains-like pictograms for neovim lsp completion items, make your lsp icons much more attractive.
+ide-like pictograms for neovim lsp completion items, make your lsp icons much more attractive.
  
 ![img](./img/neokind.jpg)
 
