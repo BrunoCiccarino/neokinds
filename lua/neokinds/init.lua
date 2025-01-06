@@ -12,7 +12,7 @@ M.config = {
     Method = "󰆧",
     Function = "󰊕",
     Constructor = " ",
-    Field = "ﴲ ",
+    Field = "",
     Variable = " ",
     Class = "󰠱 ",
     Interface = " ",
@@ -21,7 +21,7 @@ M.config = {
     Unit = " ",
     Value = " ",
     Enum = "練",
-    Keyword = "",
+    Keyword = "󰌋",
     Snippet = "",
     Color = " ",
     File = " ",
@@ -75,15 +75,20 @@ function M.configure_cmp()
   local cmp_ok, cmp = pcall(require, "cmp")
   local blink_cmp_ok, blink_cmp = pcall(require, "blink-cmp")
 
-  if blink_cmp_ok then
-    blink_cmp.setup({
-      formatting = {
-        format = function(entry, vim_item)
-          vim_item.kind = string.format("%s %s", M.config.completion_kinds[vim_item.kind] or "", vim_item.kind)
-          return vim_item
-        end,
-      },
-    })
+  if blink_cmp_ok and blink_cmp.setup then
+
+    local success = pcall(function()
+      blink_cmp.setup({
+
+        completion = {
+          completeopt = "menu,menuone,preview,noinsert", 
+        },
+      })
+    end)
+
+    if not success then
+      vim.notify("blink-cmp setup failed. Please check configuration.", vim.log.levels.WARN)
+    end
   elseif cmp_ok then
     cmp.setup({
       formatting = {
