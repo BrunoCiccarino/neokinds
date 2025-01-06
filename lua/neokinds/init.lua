@@ -14,25 +14,27 @@ M.config = {
     Constructor = " ",
     Field = "ﴲ ",
     Variable = " ",
-    Class = " ",
-    Interface = "ﰮ ",
-    Module = " ",
-    Property = "ﰠ ",
+    Class = "󰠱 ",
+    Interface = " ",
+    Module = " ",
+    Property = "󰜢 ",
     Unit = " ",
     Value = " ",
     Enum = "練",
-    Keyword = " ",
+    Keyword = "",
     Snippet = "",
     Color = " ",
-    File = " ",
+    File = " ",
     Reference = " ",
-    Folder = " ",
+    Folder = " ",
     EnumMember = " ",
     Constant = "ﲀ ",
     Struct = "ﳤ ",
     Event = " ",
     Operator = " ",
     TypeParameter = " ",
+    Boolean = " ",
+    Array = " ",
   },
 }
 
@@ -97,4 +99,3 @@ function M.configure_cmp()
 end
 
 return M
-
