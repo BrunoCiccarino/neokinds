@@ -7,6 +7,9 @@ ide-like pictograms for neovim lsp completion items, make your lsp icons much mo
 
 ![img](./img/neokind.jpg)
 
+> [!NOTE]
+> This plugin would not be possible without mini.icons and lspkind, their links are in the acknowledgements section.
+
 ## 🍺 Installation
 
 ```lua
