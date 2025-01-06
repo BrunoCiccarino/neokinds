@@ -108,8 +108,10 @@ require('blink-cmp').setup({
 <summary> cmp config</summary>
 
 ```lua
- formatting = {
-    format = function(entry, vim_item)
+    local neokinds = require('neokinds') 
+
+    formatting = {
+        format = function(entry, vim_item)
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
         luasnip = "[Snippet]",
@@ -135,3 +137,4 @@ require('blink-cmp').setup({
 
 - [mini.icons](https://github.com/echasnovski/mini.icons)
 - [lspkind.nvim](https://github.com/onsails/lspkind.nvim)
+- [nvim web devicons](https://github.com/nvim-tree/nvim-web-devicons) 
