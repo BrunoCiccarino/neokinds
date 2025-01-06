@@ -13,22 +13,33 @@ M.default_config = {
             open = "",
             empty = "",
             empty_open = "",
+            symlink = "",
         },
         files = {
             default = "",
             no_extension = "",
+            license = "",
+            news = "󰎕",
+            readme = "",
+            code_of_conduct = "󱃱",
+            todo = "󰝖",
+            [".bashrc"] = "󰒓",
             extensions = {
-                lua = "",
+                asm = "",
+                astro = "",
+                basic = "󰫯",
+                c = "",
+                cpp = "",
+                html = "",
                 js = "",
                 json = "",
-                html = "",
                 css = "",
                 md = "",
+                norg = "",
                 py = "",
                 ts = "ﯤ",
                 java = "",
-                c = "",
-                cpp = "",
+                lua = "",
                 rb = "",
                 go = "",
                 rs = "",
@@ -146,8 +157,13 @@ M.icon = function(config, node, state)
             icon = config.folder_closed or M.config.icons.folders.closed
         end
     elseif node.type == "file" then
-        local ext = node.ext or ""
-        icon = M.config.icons.files.extensions[ext] or M.config.icons.files.default
+        local ext = node.ext or ""  -- Obtemos a extensão do arquivo
+        -- Verificação segura se 'extensions' existe dentro de 'files'
+        if M.config.icons.files.extensions and M.config.icons.files.extensions[ext] then
+            icon = M.config.icons.files.extensions[ext]  -- Icone baseado na extensão
+        else
+            icon = M.config.icons.files.default  -- Se não encontrar, usa o padrão
+        end
     else
         icon = M.config.icons.files.no_extension
     end
