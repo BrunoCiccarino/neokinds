@@ -45,8 +45,8 @@ neokinds.setup({
         Reference = " ",
         Folder = " ",
         EnumMember = " ",
-        Constant = "ﲀ ",
-        Struct = "ﳤ ",
+        Constant = " ",
+        Struct = "",
         Event = " ",
         Operator = " ",
         TypeParameter = " ",
@@ -116,6 +116,10 @@ require('blink-cmp').setup({
 
 ## 🌐 Compatibility
 
-- nvim-cmp: The plugin adjusts the completion type icon.
+- cmp: full support 
 - blink-cmp full support
-- vim-builtin-cmp: Provides basic support by adjusting the completeopt option.
+
+### 👏 Acknowledgements
+
+- [mini.icons](https://github.com/echasnovski/mini.icons)
+- [lspkind.nvim](https://github.com/onsails/lspkind.nvim)
