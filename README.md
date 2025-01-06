@@ -122,7 +122,7 @@ require('blink-cmp').setup({
 
 ## 🌐 Compatibility
 
-- cmp: full support 
+- nvim-cmp: full support 
 - blink-cmp full support
 
 ### 👏 Acknowledgements
