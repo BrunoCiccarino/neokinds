@@ -131,10 +131,19 @@ require('blink-cmp').setup({
 ```
 </details>
 
+## 📁 file icons
+
+![preview](./img/neokinds.jpg)
+
+> [!TIP]
+> For file icons, we have few variants so far, but over time we will add more and more. So if you want a wide variety of file icons, go to [mini.icons](https://github.com/echasnovski/mini.icons) as the situation there is excellent. 
+
+
 ## 🌐 Compatibility
 
 - nvim-cmp: full support 
 - blink-cmp full support
+- neo-tree full support 
 
 ### 👏 Acknowledgements
 
