@@ -7,8 +7,13 @@ ide-like pictograms for neovim lsp completion items, make your lsp icons much mo
 
 ![img](./img/neokind.jpg)
 
+## ⚡️ Requirements 
+
+- nerd fonts 
+- neovim 0.10 +
+
 > [!NOTE]
-> This plugin would not be possible without mini.icons and lspkind, their links are in the acknowledgements section.
+> This plugin would not be possible without nerd fonts, mini.icons and lspkind, their links are in the acknowledgements section.
 
 > [!TODO]
 > Adding nvim-tree support
@@ -138,6 +143,33 @@ require('blink-cmp').setup({
 > [!TIP]
 > For file icons, we have few variants so far, but over time we will add more and more. So if you want a wide variety of file icons, go to [mini.icons](https://github.com/echasnovski/mini.icons) as the situation there is excellent. 
 
+### 🌳 NeoTree config
+
+```lua 
+require("neo-tree").setup({
+    close_if_last_window = false,
+    popup_border_style = "rounded",
+    enable_git_status = true,
+    enable_diagnostics = true,
+    default_component_configs = {
+        icon = {
+            folder_closed = neokinds.config.icons.folders.closed,
+            folder_open = neokinds.config.icons.folders.open,
+            folder_empty = neokinds.config.icons.folders.empty,
+            default = neokinds.config.icons.files.default,
+        },
+    },
+    filesystem = {
+        filtered_items = {
+            visible = true,
+        },
+        components = {
+            icon = function(config, node, state)
+                return neokinds.icon(config, node, state)
+            end,
+        },
+    })
+```
 
 ## 🌐 Compatibility
 
@@ -150,3 +182,4 @@ require('blink-cmp').setup({
 - [mini.icons](https://github.com/echasnovski/mini.icons)
 - [lspkind.nvim](https://github.com/onsails/lspkind.nvim)
 - [nvim web devicons](https://github.com/nvim-tree/nvim-web-devicons) 
+- [nerd-fonts](https://www.nerdfonts.com/)
