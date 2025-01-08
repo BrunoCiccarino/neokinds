@@ -127,6 +127,7 @@ M.default_config = {
         TypeParameter = " ",
         Boolean = " ",
         Array = " ",
+        Image = "󰈫",
     },
 }
 
