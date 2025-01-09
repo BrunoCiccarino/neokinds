@@ -1,0 +1,199 @@
+doc.txt
+
+================================================================================
+CONTENTS                                                            *doc-contents*
+
+1. neokinds 🥴...............................................|doc-neokinds_🥴|
+    1.1. ⚡️ Requirements.............................|doc-⚡️_requirements|
+    1.2. 🍺 Installation.................................|doc-🍺_installation|
+    1.3. ⚙️  Config.......................................|doc-⚙️__config|
+        1.3.1. 🎨 integration.............................|doc-🎨_integration|
+    1.4. 📁 file icons.....................................|doc-📁_file_icons|
+        1.4.1. 🌳 NeoTree config.......................|doc-🌳_neotree_config|
+    1.5. 🌐 Compatibility...............................|doc-🌐_compatibility|
+        1.5.1. 👏 Acknowledgements...................|doc-👏_acknowledgements|
+
+================================================================================
+NEOKINDS 🥴                                                  *doc-neokinds_🥴*
+
+ide-like pictograms for neovim lsp completion items, make your lsp icons much more attractive.
+
+[](http://www.lua.org)
+[](https://neovim.io)
+
+
+
+--------------------------------------------------------------------------------
+⚡️ REQUIREMENTS                                      *doc-⚡️_requirements*
+
+*   nerd fonts
+*   neovim 0.10 +
+>
+    [!NOTE]
+    This plugin would not be possible without nerd fonts, mini.icons and lspkind, their links are in the acknowledgements section.
+    [TODO]
+    Adding nvim-tree support
+<
+
+--------------------------------------------------------------------------------
+🍺 INSTALLATION                                          *doc-🍺_installation*
+>
+    {
+        "BrunoCiccarino/neokinds",
+        config = function ()
+            local neokinds = require("neokinds"), 
+            neokinds.setup({
+                ...
+            }),
+        end
+    }
+<
+
+--------------------------------------------------------------------------------
+⚙️  CONFIG                                                *doc-⚙️__config*
+>
+    local neokinds = require("neokinds")
+    neokinds.setup({
+        icons = {
+            error = "",
+            warn = "",
+            hint = "",
+            info = "",
+        },
+        completion_kinds = {
+            Text = " ",
+            Method = "󰆧",
+            Function = "󰊕",
+            Constructor = " ",
+            Field = "",
+            Variable = " ",
+            Class = "󰠱 ",
+            Interface = " ",
+            Module = " ",
+            Property = "󰜢 ",
+            Unit = " ",
+            Value = " ",
+            Enum = "練",
+            Keyword = "󰌋",
+            Snippet = "",
+            Color = " ",
+            File = " ",
+            Reference = " ",
+            Folder = " ",
+            EnumMember = " ",
+            Constant = " ",
+            Struct = "",
+            Event = " ",
+            Operator = " ",
+            TypeParameter = " ",
+            Boolean = " ",
+            Array = " ",
+          },        
+    })
+<
+
+🎨 INTEGRATION                                            *doc-🎨_integration*
+>
+    <details>
+    <summary> blink-cmp config</summary>
+    ```lua
+    local neokinds = require("neokinds")
+    require('blink-cmp').setup({
+        completion = {
+            list = { selection = function(ctx) return ctx.mode == "cmdline" and "auto_insert" or "preselect" end },
+            menu = {
+                border = "rounded",
+                winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+                draw = {
+                    components = {
+                        kind_icon = {
+                            text = function(ctx)
+                                
+                                local icon = neokinds.config.completion_kinds[ctx.kind] or ""
+                                return icon .. " " .. (ctx.kind or "")
+                            end,
+                            highlight = function(ctx)
+                                
+                                return "CmpItemKind" .. (ctx.kind or "Default")
+                            end,
+                        },
+                    },
+                },
+            },
+        },
+    }
+    ```
+    </details>
+<
+>
+    <details>
+    <summary> cmp config</summary>
+    ```lua
+        local neokinds = require('neokinds') 
+        formatting = {
+            format = function(entry, vim_item)
+          vim_item.menu = ({
+            nvim_lsp = "[LSP]",
+            luasnip = "[Snippet]",
+            buffer = "[Buffer]",
+            nvim_lua = "[API]",
+            path = "[Path]",
+            calc = "[Calc]",
+            emoji = "[Emoji]",
+          })[entry.source.name] or ""
+            vim_item.kind = string.format("%s %s", M.config.completion_kinds[vim_item.kind] or "", vim_item.kind)
+        return vim_item
+        end,
+      },
+    ```
+    </details>
+<
+
+--------------------------------------------------------------------------------
+📁 FILE ICONS                                              *doc-📁_file_icons*
+>
+    [!TIP]
+    For file icons, we have few variants so far, but over time we will add more and more. So if you want a wide variety of file icons, go to mini.icons (https://github.com/echasnovski/mini.icons) as the situation there is excellent.
+<
+
+🌳 NEOTREE CONFIG                                      *doc-🌳_neotree_config*
+>
+    require("neo-tree").setup({
+        close_if_last_window = false,
+        popup_border_style = "rounded",
+        enable_git_status = true,
+        enable_diagnostics = true,
+        default_component_configs = {
+            icon = {
+                folder_closed = neokinds.config.icons.folders.closed,
+                folder_open = neokinds.config.icons.folders.open,
+                folder_empty = neokinds.config.icons.folders.empty,
+                default = neokinds.config.icons.files.default,
+            },
+        },
+        filesystem = {
+            filtered_items = {
+                visible = true,
+            },
+            components = {
+                icon = function(config, node, state)
+                    return neokinds.icon(config, node, state)
+                end,
+            },
+        })
+<
+
+--------------------------------------------------------------------------------
+🌐 COMPATIBILITY                                        *doc-🌐_compatibility*
+
+*   nvim-cmp: full support
+*   blink-cmp full support
+*   neo-tree full support
+
+👏 ACKNOWLEDGEMENTS                                  *doc-👏_acknowledgements*
+
+*   mini.icons (https://github.com/echasnovski/mini.icons)
+*   lspkind.nvim (https://github.com/onsails/lspkind.nvim)
+*   nvim web devicons (https://github.com/nvim-tree/nvim-web-devicons)
+*   nerd-fonts (https://www.nerdfonts.com/)
+
