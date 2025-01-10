@@ -23,7 +23,7 @@ M.default_config = {
             empty_open = "",
             symlink = "",
             [".git"] = "",
-            [".github"] = "",
+            [".github"] = "",
             [".cache"] = "󰪺",
             [".vim"] = "󰉋",
         },
