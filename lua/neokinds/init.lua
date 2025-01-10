@@ -57,6 +57,7 @@ M.default_config = {
                 rb = "",
                 go = "󰟓",
                 gd = "",
+                git = "",
                 rs = "",
                 php = "",
                 sh = "",
